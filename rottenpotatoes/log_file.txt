@@ -20,19 +20,20 @@ Feature: display list of movies filtered by MPAA rating
     And I am on the RottenPotatoes home page     # features/step_definitions/web_steps.rb:44
     Then 10 seed movies should exist             # features/step_definitions/movie_steps.rb:12
 
-  Scenario: restrict to movies with 'PG' or 'R' ratings                                                       # features/filter_movie_list.feature:25
-    Given I am on the RottenPotatoes home page                                                                # features/step_definitions/web_steps.rb:44
+  Scenario: restrict to movies with 'PG' or 'R' ratings                                                                  # features/filter_movie_list.feature:25
+    Given I am on the RottenPotatoes home page                                                                           # features/step_definitions/web_steps.rb:44
       # enter step(s) to check the 'PG' and 'R' checkboxes
+    When I check the following ratings: PG, R                                                                            # features/step_definitions/movie_steps.rb:30
       # enter step(s) to uncheck all other checkboxes
-    When I check the following ratings: PG, R                                                                 # features/step_definitions/movie_steps.rb:30
+    And I uncheck the following ratings: G, PG-13, NC-17                                                                 # features/step_definitions/movie_steps.rb:30
       # enter step to "submit" the search form on the homepage
-    And I press "ratings_submit"                                                                              # features/step_definitions/web_steps.rb:52
+    And I press "ratings_submit"                                                                                         # features/step_definitions/web_steps.rb:52
       # enter step(s) to ensure that PG and R movies are visible
-    Then I should see: The Terminator, When Harry Met Sally, Amelie, The Incredibles, Raiders of the Lost Ark # features/step_definitions/movie_steps.rb:44
+    Then I should see the movies: The Terminator, When Harry Met Sally, Amelie, The Incredibles, Raiders of the Lost Ark # features/step_definitions/movie_steps.rb:44
       # enter step(s) to ensure that other movies are not visible
-    And I should not see: Aladdin, The Help, Chocolat, 2001: A Space Odyssey, Chicken Run                     # features/step_definitions/movie_steps.rb:44
+    And I should not see the movies: Aladdin, The Help, Chocolat, 2001: A Space Odyssey, Chicken Run                     # features/step_definitions/movie_steps.rb:44
 
-  Scenario: all ratings selected                               # features/filter_movie_list.feature:37
+  Scenario: all ratings selected                               # features/filter_movie_list.feature:38
       # see assignment
     Given I am on the RottenPotatoes home page                 # features/step_definitions/web_steps.rb:44
     When I check the following ratings: G, PG, PG-13, R, NC-17 # features/step_definitions/movie_steps.rb:30
@@ -73,5 +74,5 @@ Feature: display list of movies sorted by different criteria
     And I should see "Raiders of the Lost Ark" before "Chocolat" # features/step_definitions/movie_steps.rb:19
 
 4 scenarios (4 passed)
-27 steps (27 passed)
-0m0.425s
+28 steps (28 passed)
+0m0.366s

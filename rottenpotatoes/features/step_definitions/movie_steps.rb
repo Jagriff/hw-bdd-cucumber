@@ -41,12 +41,12 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 #  fail "Unimplemented"
 end
 
-Then /I should (not )?see: (.*)/ do |absent, movie_list|
+Then /I should (not )?see the movies: (.*)/ do |absent, movie_list|
   movie_list.split(", ").each do |movie|
     if (absent)
-      steps %Q{I should not see "#{movie}"}
+      steps %Q{Then I should not see "#{movie}"}
     else
-      steps %Q{I should see "#{movie}"}
+      steps %Q{Then I should see "#{movie}"}
     end
   end
 end
